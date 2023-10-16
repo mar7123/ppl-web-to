@@ -7,11 +7,16 @@
 |Participant|Muhammad Daffa Alifiandi, Muaz Abdul Rohim, Pujo Prayogo, Fikri Arkani Salim|
 ## Sprint Planning
 ### Goals:
-- Sprint goal 1
-- Sprint goal 2
-- …
+- Routing Antar Pages 
+- Login : Authentikasi dan validasi & implemetasi desain UI/UX 
+- Integrasi Back-end dan front-end di fitur update profile 
+- Implementasi Front-end pengerjaan Soal Tryout 
+- Implementasi API backend pada profile dan dashboard 
+- Membuat mockup desain responsive 
+- Testing API Login
+- Membuat dokumentasi sprint mingguan 
 ### Breakdown Task:
-#### Commitment: x SP
+#### Commitment: 11 SP
 - Muhammad Daffa Alifiandi: 
   - [X] Routing Antar Pages 
   - [X] Login : Authentikasi dan validasi & implemetasi desain UI/UX 
@@ -29,7 +34,7 @@
   - [X] Membuat dokumentasi sprint mingguan 
   
 
-#### Delivered:	 x SP
+#### Delivered:	 11 SP
 ### During Sprint
 2023-09-25:
 
