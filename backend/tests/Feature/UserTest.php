@@ -18,7 +18,7 @@ class UserTest extends TestCase
     public function test_create_new_user()
     {
         $this->withoutExceptionHandling();
-        $response = $this->post('auth/register',[
+        $response = $this->post('api/auth/register',[
             'username' => 'mahasiswa',
             'full_name' => 'mahasiswaA',
             'password' => 'mhs123',
@@ -38,7 +38,7 @@ class UserTest extends TestCase
     public function test_login_user()
     {
         $this->withoutExceptionHandling();
-        $response = $this->post('auth/login',[
+        $response = $this->post('api/auth/login',[
             'password' => 'mhs123',
             'email' => 'mhsmhs123@mail.com',
         ]);
