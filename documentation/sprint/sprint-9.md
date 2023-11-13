@@ -1,7 +1,7 @@
-# Sprint 6
+# Sprint 9
 
 
-|Date|16 Oktober 2023|
+|Date|6 November 2023|
 | :- | :- |
 |Created by|Fikri Arkani Salim|
 |Participant|Muhammad Daffa Alifiandi, Muaz Abdul Rohim, Pujo Prayogo, Fikri Arkani Salim|
@@ -15,23 +15,18 @@
 - Testing API update data get user data
 
 ### Breakdown Task:
-#### Commitment: 12 SP
-- Muhammad Daffa Alifiandi: 5 SP
-  - [X] Implementasi pengambilan data layout
-  - [X] Dashboard: pengambilan data layout
-  - [X] Integrasi Dashboard Home
-  - [X] Integrasi Tryout History
-  - [X] Integrasi Back-end dan front-end di fitur update profile
-- Muaz Abdul Rohim: 5 SP
-  - [X] Integrasi Back-end dan Front-end di fitur dashboard
-  - [X] Dashboard: pengambilan data layout
-  - [X] Integrasi Dashboard Home
-  - [X] Integrasi Tryout History
-  - [X] Integrasi Back-end dan front-end di fitur update profile
+#### Commitment: 7 SP
+- Muhammad Daffa Alifiandi: 3 SP
+  - [X] Maintanance
+  - [X] Bug Fixing
+- Muaz Abdul Rohim: 2 SP
+  - [X] Maintanance
+  - [X] Bug Fixing
 - Pujo Prayogo: 1 SP
   - [X] Menyesuaikan design sesuai dengan permintaan klien dan tim
-- Fikri Arkani Salim: 1 SP
+- Fikri Arkani Salim: 2 SP
   - [X] Membuat dokumentasi sprint mingguan
+  - [X] Ekplorasi App Testing dan membuat unit test
   
 
 #### Delivered:	 5 SP
