@@ -1,4 +1,4 @@
-# Sprint 5
+# Sprint 8
 
 
 |Date|30 Oktober 2023|
@@ -15,7 +15,7 @@
 - Testing API update data get user data
 
 ### Breakdown Task:
-#### Commitment: 7 SP
+#### Commitment: 8 SP
 - Muhammad Daffa Alifiandi: 3 SP
   - [X] Integrasi Back-end dan front-end di fitur pengerjaan soal
   - [X] Optimasi Tryout History
@@ -25,7 +25,7 @@
   - [X] Error Handing pengerjaan soal TO
 - Pujo Prayogo: 1 SP
   - [X] Menyesuaikan design sesuai dengan permintaan klien dan tim
-- Fikri Arkani Salim: 1 SP
+- Fikri Arkani Salim: 2 SP
   - [X] Membuat dokumentasi sprint mingguan
   - [X] Ekplorasi App Testing dan membuat unit test
   
