@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
@@ -17,18 +18,20 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $salt = Str::random(10);
         return [
             'username' => fake()->userName(),
             'full_name' => fake()->name(),
-            'password' => bcrypt("test123"), // password
+            'salt' => $salt,
+            'password' => Hash::make("test123" . $salt), // password
             'email' => fake()->unique()->safeEmail(),
             'birth_date' => fake()->date(),
             'phone_num' => fake()->e164PhoneNumber(),
-            'prov' => fake()->state(),
-            'city' => fake()->city(),
+            // 'prov' => fake()->state(),
+            // 'city' => fake()->city(),
             'school' => 'SMAN 1 Tangerang',
             'major' => fake()->randomElement(['Saintek', 'Soshum']),
-            'grad_date' => fake()->date(),
+            'grad_date' => fake()->year('+3 years'),
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
         ];

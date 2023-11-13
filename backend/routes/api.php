@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TryoutPKGController;
+use App\Http\Controllers\UserPKGController;
+use App\Http\Middleware\EnsureSubscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,10 +24,42 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
-    Route::get('/user/update', [UserController::class, 'updateUser']);
     Route::get('/logout', [UserController::class, 'logout']);
-    Route::get('/tryout', [TryoutPKGController::class, 'getTryouts']);
+
+    // payment
+    Route::post('/payments', [PaymentController::class, 'create']);
+
+    // parse soal
+    Route::get('/parseSoal', [TryoutPKGController::class, 'parseSoal']);
 });
-// Route::middleware('auth:sanctum')->post('/auth/register', [UserController::class, 'createUser']);
+Route::middleware(['auth:sanctum', EnsureSubscription::class])->group(function () {
+    Route::post('/user/update', [UserController::class, 'updateUser']);
+    // dashboard
+    Route::get('/user/tryout', [UserPKGController::class, 'getUserTryouts']);
+    Route::get('/user/tryout/history', [UserPKGController::class, 'getUserTryoutHistories']);
+    Route::get('/user/tryout/upcoming', [UserPKGController::class, 'getUserTryoutUpcoming']);
+    Route::get('/user/tryout/notpurchased', [UserPKGController::class, 'getUserTryoutNotPurchased']);
+    Route::post('/user/tryout/assign', [TryoutPKGController::class, 'assignTryout']);
+
+    // start tryout
+    Route::post('/user/tryout/start', [UserPKGController::class, 'startUserTryout']);
+    Route::post('/user/tryout/next', [UserPKGController::class, 'nextUserTryout']);
+    Route::post('/user/tryout/check', [UserPKGController::class, 'checkUserTryout']);
+    Route::post('/user/tryout/end', [UserPKGController::class, 'endUserTryout']);
+    Route::post('/user/tryout/questions', [UserPKGController::class, 'getUserTryoutQuestions']);
+    Route::post('/user/tryout/answer', [UserPKGController::class, 'answerUserTryout']);
+
+    // tryout review
+    Route::post('/user/tryout/sub', [TryoutPKGController::class, 'getTryoutSub']);
+
+    // tryout util
+    Route::post('/tryout/eval', [TryoutPKGController::class, 'evalTryout']);
+});
+
+// articles
+Route::get('/articles', [ArticleController::class, 'getArticles']);
+Route::get('/articles/{id}', [ArticleController::class, 'getArticleById']);
+
+Route::post('/payments/webhook/xendit', [PaymentController::class, 'webhook']);
 Route::post('auth/register', [UserController::class, 'createUser']);
 Route::post('auth/login', [UserController::class, 'loginUser']);
