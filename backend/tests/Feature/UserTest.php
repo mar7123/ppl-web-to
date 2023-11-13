@@ -12,8 +12,8 @@ class UserTest extends TestCase
     /**
      * A basic feature test example.
      */
-    use DatabaseMigrations;
-    use RefreshDatabase;
+    /* use DatabaseMigrations; */
+    /* use RefreshDatabase; */
 
     public function test_create_new_user()
     {
@@ -29,19 +29,16 @@ class UserTest extends TestCase
             'major' => 'Saintek',
             'grad_date' => '2024'
         ]);
-        $response->assertOk();
-        /* $response = $this->get('/');
-
-        $response->assertStatus(200); */
+        $response->assertCreated();
     }
 
     public function test_login_user()
     {
         $this->withoutExceptionHandling();
         $response = $this->post('api/auth/login',[
-            'password' => 'mhs123',
             'email' => 'mhsmhs123@mail.com',
+            'password' => 'mhs123'
         ]);
-        $response->assertOk();
+        $response->assertCreated();
     }
 }
