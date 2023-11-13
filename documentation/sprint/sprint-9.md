@@ -16,7 +16,7 @@
 
 ### Breakdown Task:
 #### Commitment: 7 SP
-- Muhammad Daffa Alifiandi: 3 SP
+- Muhammad Daffa Alifiandi: 2 SP
   - [X] Maintanance
   - [X] Bug Fixing
 - Muaz Abdul Rohim: 2 SP

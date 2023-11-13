@@ -15,7 +15,7 @@
 - Testing API update data get user data
 
 ### Breakdown Task:
-#### Commitment: 8 SP
+#### Commitment: 13 SP
 - Muhammad Daffa Alifiandi: 5 SP
   - [X] Implementasi pengerjaan tryout
   - [X] Error handling pengerjan soal TO

@@ -15,7 +15,7 @@
 - Testing API update data get user data
 
 ### Breakdown Task:
-#### Commitment: 7 SP
+#### Commitment: 8 SP
 - Muhammad Daffa Alifiandi: 3 SP
   - [X] Integrasi Back-end dan front-end di fitur pengerjaan soal
   - [X] Optimasi Tryout History
