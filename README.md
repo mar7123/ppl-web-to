@@ -8,6 +8,8 @@ Frontend: www.tryoutx.com
   
   Backend : www.code.tryoutx.com
 
+  Wireframe Mockup : https://www.figma.com/file/p5JsWQi090nmfgvEFTvWAY/Mockup-web-TryOut-xCom?type=design&node-id=152-894&mode=design&t=su0E7insph4JsT4p-0
+
 ## Anggota Kelompok
 - 140810200016 - Muhammad Daffa Alifiandi
 - 140810200026 - Mu'az Abdul Rohim
