@@ -5,7 +5,7 @@ WEB TO merupakan aplikasi platform online yang berbasis web untuk memfasilitasi 
 
 ## URL Web Tryout (TryoutX)
 Frontend: www.tryoutx.com
-Backend : www.code.tryoutx.com
+  Backend : www.code.tryoutx.com
 
 ## Anggota Kelompok
 - 140810200016 - Muhammad Daffa Alifiandi
