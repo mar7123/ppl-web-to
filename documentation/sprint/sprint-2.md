@@ -1,42 +1,42 @@
 # Sprint 2
 
 
-|Date|18 September 2023|
+|Date|25 September 2023|
 | :- | :- |
 |Created by|Fikri Arkani Salim|
 |Participant|Muhammad Daffa Alifiandi, Muaz Abdul Rohim, Pujo Prayogo, Fikri Arkani Salim|
 ## Sprint Planning
 ### Goals:
-- Implementasi API Register 
-- Testing API Register 
-- Fiksasi page pengerjaan tryout 
-- Membuat icon 
-- Fiksasi page Dashboard 
-- Menyelesaikan Mockup Landing Page 
-- Fiksasi Mockup Page Register 
-- Menyelesaikan Mockup Page Artikel 
-- Testing API Register 
+- Routing Antar Pages 
+- Login : Authentikasi dan validasi & implemetasi desain UI/UX 
+- Integrasi Back-end dan front-end di fitur update profile 
+- Implementasi Front-end pengerjaan Soal Tryout 
+- Implementasi API backend pada profile dan dashboard 
+- Membuat mockup desain responsive 
+- Testing API Login
 - Membuat dokumentasi sprint mingguan 
 ### Breakdown Task:
-#### Commitment: 10 SP
+#### Commitment: 11 SP
 - Muhammad Daffa Alifiandi: 
-  - [X] Implementasi API Register 
+  - [X] Routing Antar Pages 
+  - [X] Login : Authentikasi dan validasi & implemetasi desain UI/UX 
+  - [X] Integrasi Back-end dan front-end di fitur update profile 
+  - [X] Implementasi Front-end pengerjaan Soal Tryout 
+  - [X] Implementasi API backend pada profile dan dashboard 
 - Muaz Abdul Rohim: 
-  - [X] Testing API Register 
+  - [X] Error Handling autentikasi 
+  - [X] Login : Authentikasi dan validasi & implemetasi desain UI/UX 
+  - [X] Integrasi Back-end dan front-end di fitur update profile 
 - Pujo Prayogo: 
-  - [X] Fiksasi page pengerjaan tryout 
-  - [X] Membuat icon 
-  - [X] Fiksasi page Dashboard 
-  - [X] Menyelesaikan Mockup Landing Page 
-  - [X] Fiksasi Mockup Page Register 
-  - [X] Menyelesaikan Mockup Page Artikel 
+  - [X] Membuat mockup desain responsive 
 - Fikri Arkani Salim: 
-  - [X] Testing API Register 
+  - [X] Testing API Login 
   - [X] Membuat dokumentasi sprint mingguan 
+  
 
-#### Delivered:	 10 SP
+#### Delivered:	 11 SP
 ### During Sprint
-2023-09-18:
+2023-09-25:
 
 1. Feedback
 1. Blocker

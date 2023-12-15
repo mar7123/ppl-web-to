@@ -1,7 +1,7 @@
 # Sprint 8
 
 
-|Date|30 Oktober 2023|
+|Date|6 November 2023|
 | :- | :- |
 |Created by|Fikri Arkani Salim|
 |Participant|Muhammad Daffa Alifiandi, Muaz Abdul Rohim, Pujo Prayogo, Fikri Arkani Salim|
@@ -15,14 +15,13 @@
 - Testing API update data get user data
 
 ### Breakdown Task:
-#### Commitment: 8 SP
-- Muhammad Daffa Alifiandi: 3 SP
-  - [X] Integrasi Back-end dan front-end di fitur pengerjaan soal
-  - [X] Optimasi Tryout History
-  - [X] Error Handing pengerjaan soal TO
+#### Commitment: 7 SP
+- Muhammad Daffa Alifiandi: 2 SP
+  - [X] Maintanance
+  - [X] Bug Fixing
 - Muaz Abdul Rohim: 2 SP
-  - [X] Integrasi Back-end dan front-end di fitur pengerjaan soal
-  - [X] Error Handing pengerjaan soal TO
+  - [X] Maintanance
+  - [X] Bug Fixing
 - Pujo Prayogo: 1 SP
   - [X] Menyesuaikan design sesuai dengan permintaan klien dan tim
 - Fikri Arkani Salim: 2 SP

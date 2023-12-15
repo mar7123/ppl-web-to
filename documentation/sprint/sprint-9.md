@@ -1,7 +1,7 @@
 # Sprint 9
 
 
-|Date|6 November 2023|
+|Date|13 November 2023|
 | :- | :- |
 |Created by|Fikri Arkani Salim|
 |Participant|Muhammad Daffa Alifiandi, Muaz Abdul Rohim, Pujo Prayogo, Fikri Arkani Salim|
