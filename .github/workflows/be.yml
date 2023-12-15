@@ -1,7 +1,7 @@
 on:
   push:
     paths:
-    - 'backend/**'
+      - 'backend/**'
     branches:
       - main
 name: 🚀 Deploy website on push
