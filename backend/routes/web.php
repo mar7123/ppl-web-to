@@ -18,12 +18,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/run-migrations', function () {
-    return Artisan::call('migrate', ["--force" => true]);
-});
-Route::get('/run-seeder', function () {
-    return Artisan::call('db:seed');
-});
+// Route::get('/run-migrations', function () {
+//     return Artisan::call('migrate', ["--force" => true]);
+// });
+// Route::get('/run-seeder', function () {
+//     return Artisan::call('db:seed');
+// });
 Route::get('/refresh-migrations', function () {
     return Artisan::call('migrate:refresh', ["--force" => true, "--seed" => true]);
 });
