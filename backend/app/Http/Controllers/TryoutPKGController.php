@@ -18,12 +18,12 @@ class TryoutPKGController extends Controller
     public function evalTryout(Request $request): Response
     {
         try {
-            if ($request->user()->email != 'admin123@email.com') {
-                return Response([
-                    'status' => false,
-                    'message' => 'Unauthorized',
-                ], 401);
-            }
+            // if ($request->user()->email != 'admin123@email.com') {
+            //     return Response([
+            //         'status' => false,
+            //         'message' => 'Unauthorized',
+            //     ], 401);
+            // }
             $to = TryoutPKG::where('tryout_id', $request->tryout_id)->first();
             if ($to == null) {
                 return Response([
@@ -116,19 +116,24 @@ class TryoutPKGController extends Controller
     public function parseSoal(Request $request): Response
     {
         try {
-            $usr = $request->user();
-            if ($request->user()->email == 'admin123@email.com' && $request->user_id != null) {
-                $usr = User::where('user_id', $request->user_id)->first();
+            if ($request->user()->email != 'admin123@email.com') {
+                return Response([
+                    'status' => false,
+                    'message' => 'Unauthorized',
+                ], 401);
             }
             $title = "Try Out 8 SNBT 2023 Cornell";
-            $doc = new DOMDocument();
-            $doc->loadHTMLFile(__DIR__ . "/Soal//" . $title . "/Skolastik.htm");
-            $sk_img = $doc->getElementsByTagName('img');
+            //
+            // Skolastik
+            //
+            $doc_skolastik = new DOMDocument();
+            $doc_skolastik->loadHTMLFile(__DIR__ . "/Soal//" . $title . "/Skolastik.htm");
+            $sk_img = $doc_skolastik->getElementsByTagName('img');
             foreach ($sk_img as $img) {
                 $img_attr = $img->getAttribute('src');
                 $img->setAttribute("src", "https://code.tryoutx.com/" . str_replace(" ", "%20", $title) . "/" . $img_attr);
             }
-            $tds = $doc->getElementsByTagName('td');
+            $tds = $doc_skolastik->getElementsByTagName('td');
             $myfile = fopen(__DIR__ . "/Soal//" . $title . "/Question.php", "w");
             $question_ch = fopen(__DIR__ . "/Soal//" . $title . "/Choice.php", "w");
             fwrite($myfile, '<?php' . "\n" . '$tryoutQuestionPKG = array(' . "\n");
@@ -148,15 +153,15 @@ class TryoutPKGController extends Controller
                     $subto = 'Kemampuan Memahami Bacaan dan Menulis';
                 } else if ($count < 85) {
                     $subto = 'Pengetahuan Kuantitatif';
-                } else if ($count < 99) {
-                    $subto = 'Literasi dalam Bahasa Indonesia';
                 }
                 $td_attr = $td->getAttribute('width');
+                // col width
                 if ($td_attr != "411") {
                     continue;
                 }
                 fwrite($myfile, 'array(\'sub_title\' => \'' . $subto . '\',' . "\n" . '\'question_desc\' => \'');
                 $td_child = $td->childNodes;
+                $q_type = 0;
                 foreach ($td_child as $td_ch) {
                     if ($td_ch->nodeType != XML_ELEMENT_NODE) {
                         continue;
@@ -170,12 +175,22 @@ class TryoutPKGController extends Controller
                         str_contains($domElementXml, "(E)")
                     ) {
                         $truth = 'false';
-                        fwrite($question_ch, 'array(\'choice_img\' => \'\',' . "\n" . '\'explanation\' => \'\',' . "\n" . '\'choice_desc\' => \'');
+                        $choice_val = "null";
+                        fwrite($question_ch, 'array(\'qnum\' => ' . ($count + 1) . ',' . "\n" . '\'choice_img\' => \'\',' . "\n" . '\'explanation\' => \'\',' . "\n" . '\'choice_desc\' => \'');
                         $p_child = $td_ch->childNodes;
                         foreach ($p_child as $p_ch) {
                             $domElementP = $p_ch->ownerDocument->saveXML($p_ch);
-                            if (str_contains($domElementP, "background:yellow") || str_contains($domElementP, "trueans")) {
+                            if (str_contains($domElementP, "background:yellow") || str_contains($domElementP, "background:&#13;&#10;  yellow") || str_contains($domElementP, "trueanstag")) {
                                 $truth = 'true';
+                            }
+                            if (str_contains($domElementP, "valtag")) {
+                                $start = "valtag";
+                                $end = "end";
+
+                                $start_pos = strpos($domElementP, $start);
+                                $end_pos = strpos($domElementP, $end);
+
+                                $choice_val = substr($domElementP, $start_pos + strlen($start_pos), $end_pos - $start_pos - strlen($start));
                             }
                             if (
                                 str_contains($domElementP, "(A)") ||
@@ -183,20 +198,127 @@ class TryoutPKGController extends Controller
                                 str_contains($domElementP, "(C)") ||
                                 str_contains($domElementP, "(D)") ||
                                 str_contains($domElementP, "(E)") ||
-                                str_contains($domElementP, "trueans")
+                                str_contains($domElementP, "trueanstag") ||
+                                str_contains($domElementP, "valtag")
                             ) {
                                 continue;
                             }
                             $domElementP = $p_ch->ownerDocument->saveXML($p_ch);
                             $domElementP = str_replace("background:yellow", "background:none", $domElementP);
+                            $domElementP = str_replace("background:&#13;&#10;  yellow", "background:none", $domElementP);
                             fwrite($question_ch, $domElementP);
                         }
-                        fwrite($question_ch, "'," . "\n" . "'true_answer' => " . $truth . ")," . "\n");
+                        fwrite($question_ch, "'," . "\n" . "'true_answer' => " . $truth . "," . "\n" . "'choice_val' => " . $choice_val . ")," . "\n");
                     } else {
+                        if (str_contains($domElementXml, "checkboxesqtag")) {
+                            $q_type = 1;
+                            continue;
+                        } else if (str_contains($domElementXml, "tableqtag")) {
+                            $q_type = 2;
+                            continue;
+                        }
                         fwrite($myfile, $domElementXml);
                     }
                 }
-                fwrite($myfile, "')," . "\n");
+                fwrite($myfile, "'," . "\n");
+                if ($q_type != 0) {
+                    fwrite($myfile, "'question_type' => " . $q_type);
+                }
+                fwrite($myfile, ")," . "\n");
+                $count = $count + 1;
+            }
+            //
+            // Literasi
+            //
+            $doc_literasi = new DOMDocument();
+            $doc_literasi->loadHTMLFile(__DIR__ . "/Soal//" . $title . "/Literasi.htm");
+            $sk_img = $doc_literasi->getElementsByTagName('img');
+            foreach ($sk_img as $img) {
+                $img_attr = $img->getAttribute('src');
+                $img->setAttribute("src", "https://code.tryoutx.com/" . str_replace(" ", "%20", $title) . "/" . $img_attr);
+            }
+            $tds = $doc_literasi->getElementsByTagName('td');
+            $subto = '';
+            foreach ($tds as $td) {
+                if ($count < 115) {
+                    $subto = 'Literasi dalam Bahasa Indonesia';
+                } else if ($count < 135) {
+                    $subto = 'Literasi dalam Bahasa Inggris';
+                } else if ($count < 155) {
+                    $subto = 'Penalaran Matematika';
+                }
+                $td_attr = $td->getAttribute('width');
+                // col width
+                if ($td_attr != "583") {
+                    continue;
+                }
+
+                fwrite($myfile, 'array(\'sub_title\' => \'' . $subto . '\',' . "\n" . '\'question_desc\' => \'');
+                $td_child = $td->childNodes;
+                $q_type = 0;
+                foreach ($td_child as $td_ch) {
+                    if ($td_ch->nodeType != XML_ELEMENT_NODE) {
+                        continue;
+                    }
+                    $domElementXml = $td_ch->ownerDocument->saveXML($td_ch);
+                    if (
+                        str_contains($domElementXml, "(A)") ||
+                        str_contains($domElementXml, "(B)") ||
+                        str_contains($domElementXml, "(C)") ||
+                        str_contains($domElementXml, "(D)") ||
+                        str_contains($domElementXml, "(E)")
+                    ) {
+                        $truth = 'false';
+                        $choice_val = "null";
+                        fwrite($question_ch, 'array(\'qnum\' => ' . ($count + 1) . ',' . "\n" . '\'choice_img\' => \'\',' . "\n" . '\'explanation\' => \'\',' . "\n" . '\'choice_desc\' => \'');
+                        $p_child = $td_ch->childNodes;
+                        foreach ($p_child as $p_ch) {
+                            $domElementP = $p_ch->ownerDocument->saveXML($p_ch);
+                            if (str_contains($domElementP, "background:yellow") || str_contains($domElementP, "background:&#13;&#10;  yellow") || str_contains($domElementP, "trueanstag")) {
+                                $truth = 'true';
+                            }
+                            if (str_contains($domElementP, "valtag")) {
+                                $start = "valtag";
+                                $end = "end";
+
+                                $start_pos = strpos($domElementP, $start);
+                                $end_pos = strpos($domElementP, $end);
+
+                                $choice_val = substr($domElementP, $start_pos + strlen($start), $end_pos - $start_pos - strlen($start));
+                            }
+                            if (
+                                str_contains($domElementP, "(A)") ||
+                                str_contains($domElementP, "(B)") ||
+                                str_contains($domElementP, "(C)") ||
+                                str_contains($domElementP, "(D)") ||
+                                str_contains($domElementP, "(E)") ||
+                                str_contains($domElementP, "trueans") ||
+                                str_contains($domElementP, "valtag")
+                            ) {
+                                continue;
+                            }
+                            $domElementP = $p_ch->ownerDocument->saveXML($p_ch);
+                            $domElementP = str_replace("background:yellow", "background:none", $domElementP);
+                            $domElementP = str_replace("background:&#13;&#10;  yellow", "background:none", $domElementP);
+                            fwrite($question_ch, $domElementP);
+                        }
+                        fwrite($question_ch, "'," . "\n" . "'true_answer' => " . $truth . "," . "\n" . "'choice_val' => " . $choice_val . ")," . "\n");
+                    } else {
+                        if (str_contains($domElementXml, "checkboxesqtag")) {
+                            $q_type = 1;
+                            continue;
+                        } else if (str_contains($domElementXml, "tableqtag")) {
+                            $q_type = 2;
+                            continue;
+                        }
+                        fwrite($myfile, $domElementXml);
+                    }
+                }
+                fwrite($myfile, "'," . "\n");
+                if ($q_type != 0) {
+                    fwrite($myfile, "'question_type' => " . $q_type);
+                }
+                fwrite($myfile, ")," . "\n");
                 $count = $count + 1;
             }
             fwrite($myfile, ');');
@@ -239,28 +361,30 @@ class TryoutPKGController extends Controller
                             $result = $to_check->tryout_subs()->where('sub_title', $tryoutQuestionPKG[($sequence->index - 1) % count($tryoutQuestionPKG)]['sub_title'])->first();
                             return $result->tryout_sub_id;
                         },
-                        'question_desc' => $tryoutQuestionPKG[($sequence->index) % count($tryoutQuestionPKG)]['question_desc'],
-                        'question_type' => function ($var) use ($sequence, $tryoutQuestionPKG) {
-                            if (array_key_exists('question_type', $tryoutQuestionPKG[($sequence->index) % count($tryoutQuestionPKG)])) {
-                                return $tryoutQuestionPKG[($sequence->index) % count($tryoutQuestionPKG)]['question_type'];
+                        'question_desc' => function () use ($sequence, $tryoutQuestionPKG) {
+                            return $tryoutQuestionPKG[($sequence->index - 1) % count($tryoutQuestionPKG)]['question_desc'];
+                        },
+                        'question_type' => function () use ($sequence, $tryoutQuestionPKG) {
+                            if (array_key_exists('question_type', $tryoutQuestionPKG[($sequence->index - 1) % count($tryoutQuestionPKG)])) {
+                                return $tryoutQuestionPKG[($sequence->index - 1) % count($tryoutQuestionPKG)]['question_type'];
+                            } else {
+                                return 0;
                             }
-                            return 0;
                         },
                     ]
                 )
-                ->has(
-                    \App\Models\QuestionChoice::factory(count($tryoutChoicesPKG) / count($tryoutQuestionPKG))
-                        ->sequence(
-                            fn ($sequence) => [
-                                'choice_img' => $tryoutChoicesPKG[($sequence->index) % count($tryoutChoicesPKG)]['choice_img'],
-                                'explanation' => $tryoutChoicesPKG[($sequence->index) % count($tryoutChoicesPKG)]['explanation'],
-                                'choice_desc' => $tryoutChoicesPKG[($sequence->index) % count($tryoutChoicesPKG)]['choice_desc'],
-                                'true_answer' => $tryoutChoicesPKG[($sequence->index) % count($tryoutChoicesPKG)]['true_answer'],
-                            ]
-                        ),
-                    'question_choices'
-                )
                 ->create();
+            \App\Models\QuestionChoice::factory(count($tryoutChoicesPKG))
+                ->sequence(
+                    fn ($sequence) => [
+                        'question_id' => $tryoutChoicesPKG[($sequence->index) % count($tryoutChoicesPKG)]['qnum'],
+                        'choice_img' => $tryoutChoicesPKG[($sequence->index) % count($tryoutChoicesPKG)]['choice_img'],
+                        'explanation' => $tryoutChoicesPKG[($sequence->index) % count($tryoutChoicesPKG)]['explanation'],
+                        'choice_desc' => $tryoutChoicesPKG[($sequence->index) % count($tryoutChoicesPKG)]['choice_desc'],
+                        'true_answer' => $tryoutChoicesPKG[($sequence->index) % count($tryoutChoicesPKG)]['true_answer'],
+                        'choice_val' => $tryoutChoicesPKG[($sequence->index) % count($tryoutChoicesPKG)]['choice_val'],
+                    ]
+                )->create();
             return Response([
                 'status' => true,
                 'message' => 'parsed',

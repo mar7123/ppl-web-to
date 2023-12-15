@@ -121,7 +121,18 @@ class UserPKGFactory extends Factory
                                         ->first()
                                         ->question_choices()
                                         ->where('true_answer', $rnd)
-                                        ->pluck('choice_id');
+                                        ->get();
+                                    if ($qs_id->first() == null) {
+                                        $rnd = !$rnd;
+                                        $qs_id = \App\Models\UserPKGQuest::where('user_pkg_quest_id', $userpkgquest['user_pkg_quest_id'])
+                                            ->first()
+                                            ->tryout_questions()
+                                            ->first()
+                                            ->question_choices()
+                                            ->where('true_answer', $rnd)
+                                            ->get();
+                                    }
+                                    $qs_id = $qs_id->pluck('choice_id');
                                     return $qs_id->get(($sequence->index - 1) % 1);
                                 }
                             ]
@@ -129,6 +140,29 @@ class UserPKGFactory extends Factory
                     'user_answers'
                 )
                 ->create();
+            // $pkg_quest = $user_pkg->user_pkg_questions()->get();
+            // foreach ($pkg_quest as $pq) {
+            //     $make_count = 1;
+            //     $to_q = $pq->tryout_questions()->first();
+            //     $to_qc = $to_q->question_choices()->get();
+            //     if ($to_q->question_type == 2) {
+            //         $make_count = $to_qc->count();
+            //     }
+            //     \App\Models\UserAnswer::factory($make_count)
+            //         ->state(new Sequence(
+            //             fn ($sequence) => [
+            //                 'user_pkg_quest_id' => $pq->user_pkg_quest_id,
+            //                 'choice_id' => function ($var) use ($sequence, $to_qc, $make_count) {
+            //                     $qs_id = $to_qc->pluck('choice_id');
+            //                     return $qs_id->get(($sequence->index - 1) % $make_count);
+            //                 },
+            //                 'choice_val' => function ($var) use ($sequence, $to_qc, $make_count) {
+            //                     $qs_id = $to_qc->pluck('choice_val');
+            //                     return $qs_id->get(($sequence->index - 1) % $make_count);
+            //                 }
+            //             ]
+            //         ))->create();
+            // }
         });
     }
 }

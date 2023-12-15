@@ -137,7 +137,7 @@ class UserPKGController extends Controller
                 ->wherePivot('user_pkg_id', $request->user_pkg_id)
                 ->first()
                 ->tryout_questions()
-                ->inRandomOrder($toauth->pivot->shuffle_seed)
+                // ->inRandomOrder($toauth->pivot->shuffle_seed)
                 ->pluck('question_id');
             $subto = $request->user()
                 ->tryouts()
@@ -333,9 +333,10 @@ class UserPKGController extends Controller
                     $item->pivot->user_answers;
                 })
                 ->load([
-                    'question_choices' => function ($query) use ($toauth) {
-                        $query->inRandomOrder($toauth->shuffle_seed);
-                    }
+                    'question_choices'
+                    // => function ($query) use ($toauth) {
+                    //     $query->inRandomOrder($toauth->shuffle_seed);
+                    // }
                 ]);
             $to_sub = TryoutSub::where('tryout_sub_id', $sub_id)->first();
             if ($toauth->user_end != null) {
@@ -424,8 +425,13 @@ class UserPKGController extends Controller
             //     ], 200);
             // }
             $ans = array();
+            $q_type = $toauth->question_type;
             for ($i = 0; $i < count($request->choice_id); $i++) {
-                $ans[$request->choice_id[$i]] = ['choice_val' => $request->choice_val[$i]];
+                $cval = $request->choice_val[$i];
+                if ($q_type < 2) {
+                    $cval = null;
+                }
+                $ans[$request->choice_id[$i]] = ['choice_val' => $cval];
             }
             $pkg_quest->question_choices()->detach();
             $pkg_quest->question_choices()->attach($ans);

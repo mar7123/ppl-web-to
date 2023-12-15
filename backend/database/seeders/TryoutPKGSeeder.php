@@ -6,6 +6,7 @@ use App\Models\TryoutPKG;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
+use Throwable;
 
 class TryoutPKGSeeder extends Seeder
 {
@@ -22,13 +23,11 @@ class TryoutPKGSeeder extends Seeder
         //     'desc_to' => 'Soal TO'
         // ]);
         require_once('TryoutSeed.php');
-        $title = "Try Out 8 SNBT 2023 Cornell";
-        $to_check = TryoutPKG::where('title', 'like', $title . '%')->get();
-        $series = $to_check->count() + 1;
-        \App\Models\TryoutPKG::factory(count($tryoutPKG))
+        $multiplier = 2;
+        \App\Models\TryoutPKG::factory(count($tryoutPKG) * $multiplier)
             ->sequence(
                 fn ($sequence) => [
-                    'title' => $tryoutPKG[$sequence->index % 1]['title'] . " " . $series,
+                    'title' => $tryoutPKG[$sequence->index % 1]['title'] . ($sequence->index + 1),
                     'start_time' => $tryoutPKG[$sequence->index % 1]['start_time'],
                     'end_time' => $tryoutPKG[$sequence->index % 1]['end_time'],
                     'desc_to' => $tryoutPKG[$sequence->index % 1]['desc_to'],
@@ -38,46 +37,53 @@ class TryoutPKGSeeder extends Seeder
                 \App\Models\TryoutSub::factory(count($tryoutSubPKG))
                     ->sequence(
                         fn ($sequence) => [
-                            'sub_title' => $tryoutSubPKG[$sequence->index % 9]['sub_title'],
-                            'sub_duration' => $tryoutSubPKG[$sequence->index % 9]['sub_duration'],
-                            'sub_order' => $tryoutSubPKG[$sequence->index % 9]['sub_order'],
-                            'mean_val' => $tryoutSubPKG[$sequence->index % 9]['mean_val'],
-                            'std_val' => $tryoutSubPKG[$sequence->index % 9]['std_val'],
+                            'sub_title' => $tryoutSubPKG[$sequence->index % count($tryoutSubPKG)]['sub_title'],
+                            'sub_duration' => $tryoutSubPKG[$sequence->index % count($tryoutSubPKG)]['sub_duration'],
+                            'sub_order' => $tryoutSubPKG[$sequence->index % count($tryoutSubPKG)]['sub_order'],
+                            'mean_val' => $tryoutSubPKG[$sequence->index % count($tryoutSubPKG)]['mean_val'],
+                            'std_val' => $tryoutSubPKG[$sequence->index % count($tryoutSubPKG)]['std_val'],
                         ]
                     ),
                 'tryout_subs'
             )
             ->create();
-        $to_check = TryoutPKG::where('title', $title . " " . $series)->first();
-        \App\Models\TryoutQuestion::factory(count($tryoutQuestionPKG))
-            ->sequence(
-                fn ($sequence) => [
-                    'tryout_sub_id' => function ($var) use ($sequence, $to_check, $tryoutQuestionPKG) {
-                        $result = $to_check->tryout_subs()->where('sub_title', $tryoutQuestionPKG[($sequence->index - 1) % count($tryoutQuestionPKG)]['sub_title'])->first();
-                        return $result->tryout_sub_id;
-                    },
-                    'question_desc' => $tryoutQuestionPKG[($sequence->index) % count($tryoutQuestionPKG)]['question_desc'],
-                    'question_type' => function ($var) use ($sequence, $tryoutQuestionPKG) {
-                        if (array_key_exists('question_type', $tryoutQuestionPKG[($sequence->index) % count($tryoutQuestionPKG)])) {
-                            return $tryoutQuestionPKG[($sequence->index) % count($tryoutQuestionPKG)]['question_type'];
-                        }
-                        return 0;
-                    },
-                ]
-            )
-            ->has(
-                \App\Models\QuestionChoice::factory(count($tryoutChoicesPKG) / count($tryoutQuestionPKG))
-                    ->sequence(
-                        fn ($sequence) => [
-                            'choice_img' => $tryoutChoicesPKG[($sequence->index) % count($tryoutChoicesPKG)]['choice_img'],
-                            'explanation' => $tryoutChoicesPKG[($sequence->index) % count($tryoutChoicesPKG)]['explanation'],
-                            'choice_desc' => $tryoutChoicesPKG[($sequence->index) % count($tryoutChoicesPKG)]['choice_desc'],
-                            'true_answer' => $tryoutChoicesPKG[($sequence->index) % count($tryoutChoicesPKG)]['true_answer'],
-                        ]
-                    ),
-                'question_choices'
-            )
-            ->create();
+        $created_to = TryoutPKG::get();
+        $count_to = 0;
+        foreach ($created_to as $ct) {
+            $to_sub = $ct->tryout_subs()->get();
+            \App\Models\TryoutQuestion::factory(count($tryoutQuestionPKG))
+                ->sequence(
+                    fn ($sequence) => [
+                        'tryout_sub_id' => function ($var) use ($sequence, $to_sub, $tryoutQuestionPKG) {
+                            $result = $to_sub->where('sub_title', $tryoutQuestionPKG[($sequence->index - 1) % count($tryoutQuestionPKG)]['sub_title'])->first();
+                            return $result->tryout_sub_id;
+                        },
+                        'question_desc' => function () use ($sequence, $tryoutQuestionPKG) {
+                            return $tryoutQuestionPKG[($sequence->index - 1) % count($tryoutQuestionPKG)]['question_desc'];
+                        },
+                        'question_type' => function () use ($sequence, $tryoutQuestionPKG) {
+                            if (array_key_exists('question_type', $tryoutQuestionPKG[($sequence->index - 1) % count($tryoutQuestionPKG)])) {
+                                return $tryoutQuestionPKG[($sequence->index - 1) % count($tryoutQuestionPKG)]['question_type'];
+                            } else {
+                                return 0;
+                            }
+                        },
+                    ]
+                )
+                ->create();
+            \App\Models\QuestionChoice::factory(count($tryoutChoicesPKG))
+                ->sequence(
+                    fn ($sequence) => [
+                        'question_id' => ($tryoutChoicesPKG[($sequence->index) % count($tryoutChoicesPKG)]['qnum']) + (count($tryoutQuestionPKG) * $count_to),
+                        'choice_img' => $tryoutChoicesPKG[($sequence->index) % count($tryoutChoicesPKG)]['choice_img'],
+                        'explanation' => $tryoutChoicesPKG[($sequence->index) % count($tryoutChoicesPKG)]['explanation'],
+                        'choice_desc' => $tryoutChoicesPKG[($sequence->index) % count($tryoutChoicesPKG)]['choice_desc'],
+                        'true_answer' => $tryoutChoicesPKG[($sequence->index) % count($tryoutChoicesPKG)]['true_answer'],
+                        'choice_val' => $tryoutChoicesPKG[($sequence->index) % count($tryoutChoicesPKG)]['choice_val'],
+                    ]
+                )->create();
+            $count_to = $count_to + 1;
+        }
         // $sub_count = 3;
         // \App\Models\TryoutPKG::factory(5)
         //     ->has(

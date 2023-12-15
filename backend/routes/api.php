@@ -22,6 +22,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/user', function (Request $request) {
+        $expiry = new DateTime();
+        $expiry->modify('+1 hour');
+        $request->user()->tokens()->update(['expires_at' => $expiry]);
         return $request->user();
     });
     Route::get('/logout', [UserController::class, 'logout']);
@@ -51,10 +54,12 @@ Route::middleware(['auth:sanctum', EnsureSubscription::class])->group(function (
 
     // tryout review
     Route::post('/user/tryout/sub', [TryoutPKGController::class, 'getTryoutSub']);
-
-    // tryout util
-    Route::post('/tryout/eval', [TryoutPKGController::class, 'evalTryout']);
 });
+// tryout util
+Route::post('/tryout/eval', [TryoutPKGController::class, 'evalTryout']);
+
+Route::post('/forgotpass', [UserController::class, 'forgotPass'])->name('password.email');
+Route::post('/resetpass', [UserController::class, 'resetPass'])->name('password.update');
 
 // articles
 Route::get('/articles', [ArticleController::class, 'getArticles']);

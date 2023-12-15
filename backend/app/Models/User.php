@@ -20,8 +20,6 @@ class User extends Authenticatable
     protected $fillable = [
         'username',
         'full_name',
-        'salt',
-        'password',
         'email',
         'birth_date',
         'phone_num',
@@ -30,6 +28,12 @@ class User extends Authenticatable
         'school',
         'major',
         'grad_date',
+        'subscribed_at'
+    ];
+    protected $guarded = [
+        'salt',
+        'password',
+        'remember_token',
         'subscribed_at'
     ];
     protected $hidden = [
