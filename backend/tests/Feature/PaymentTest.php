@@ -21,8 +21,8 @@ class PaymentTest extends TestCase
     public function test_create_method()
     {
         $loginResponse = $this->post('api/auth/login',[
-            'email' => 'mhsmhs123@mail.com',
-            'password' => 'mhs123'
+            'email' => 'admin123@email.com',
+            'password' => 'admin123'
         ]);
         // echo var_dump($loginResponse);
 
@@ -34,6 +34,7 @@ class PaymentTest extends TestCase
             'payer_email' => 'mhsmhs123@mail.com',
         ]);
 
+        /* echo var_dump($response); */
         $response->assertStatus(201);
         // echo var_dump($response);
         
