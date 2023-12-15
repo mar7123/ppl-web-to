@@ -3,6 +3,9 @@
 ## Deskripsi Aplikasi
 WEB TO merupakan aplikasi platform online yang berbasis web untuk memfasilitasi calon mahasiswa dalam mempersiapkan diri menghadapi Ujian Tulis Berbasis Komputer (UTBK) secara efisien. Aplikasi ini dirancang untuk membantu para calon mahasiswa mengukur kemampuan mereka dalam mata pelajaran yang diujikan dalam UTBK, serta memberikan pengalaman nyata dalam simulasi ujian sesungguhnya.
 
+## URL Web Tryout (TryoutX)
+[www.tryoutx.com]
+
 ## Anggota Kelompok
 - 140810200016 - Muhammad Daffa Alifiandi
 - 140810200026 - Mu'az Abdul Rohim
