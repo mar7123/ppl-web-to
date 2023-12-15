@@ -32,6 +32,6 @@ jobs:
       with:
         server: tryoutx.com
         username: tryoutxc
-        local-dir : ./.next/
+        local-dir : ./frontend/.next/
         server-dir: domains/tryoutx.com/public_html/
         password: ${{ secrets.PASSWORD }}
