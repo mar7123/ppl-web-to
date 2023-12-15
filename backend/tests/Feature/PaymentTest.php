@@ -34,7 +34,6 @@ class PaymentTest extends TestCase
             'payer_email' => 'mhsmhs123@mail.com',
         ]);
 
-        echo var_dump($response);
         $response->assertStatus(201);
         // echo var_dump($response);
         
