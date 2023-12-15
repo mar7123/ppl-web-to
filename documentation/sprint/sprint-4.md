@@ -1,41 +1,35 @@
 # Sprint 4
 
 
-|Date|2 Oktober 2023|
+|Date|9 Oktober 2023|
 | :- | :- |
 |Created by|Fikri Arkani Salim|
 |Participant|Muhammad Daffa Alifiandi, Muaz Abdul Rohim, Pujo Prayogo, Fikri Arkani Salim|
 ## Sprint Planning
 ### Goals:
-- Implementasi fornt-end update profile
-- Implementasi Front-end Dashboard setelah fiksasi Desain
-- Optimisasi Desain front-end pada login dan register
-- Membuat implementasi front end Landing Page
-- Dashboard: pengambilan data tryout
-- Implementasi pengerjaan tryout
-- Membuat mockup desain 
+- Implementasi fornt-end Dashboard setelah fiksasi desain
+- Konfirmasi email menggunakan email server
+- Membuat versi Prototype 
+- Membuat versi Prototype mockup  
 - Membuat dokumentasi sprint mingguan
-- Testing API logout 
+- Testing API update data get user data
+
 ### Breakdown Task:
-#### Commitment: 9 SP
+#### Commitment: 5 SP
 - Muhammad Daffa Alifiandi: 
-  - [X] Implementasi fornt-end update profile
-  - [X] Implementasi Front-end Dashboard setelah fiksasi Desain
-  - [X] Optimisasi Desain front-end pada login dan register
-  - [X] Membuat implementasi front end Landing Page
+  - [X] Implementasi fornt-end Dashboard setelah fiksasi desain
 - Muaz Abdul Rohim: 
-  - [X] Dashboard: pengambilan data tryout
-  - [X] Implementasi pengerjaan tryout
+  - [X] Konfirmasi email menggunakan email server
 - Pujo Prayogo: 
-  - [X] Membuat mockup desain responsive 
+  - [X] Menyesuaikan design sesuai dengan permintaan klien dan tim  
 - Fikri Arkani Salim: 
   - [X] Membuat dokumentasi sprint mingguan
-  - [X] Testing API logout 
+  - [X] Testing API update data get user data
   
 
-#### Delivered:	 9 SP
+#### Delivered:	 5 SP
 ### During Sprint
-2023-10-02:
+2023-10-09:
 
 1. Feedback
 1. Blocker

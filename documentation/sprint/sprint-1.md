@@ -1,41 +1,42 @@
 # Sprint 1
 
 
-|Date|11 September 2023|
+|Date|18 September 2023|
 | :- | :- |
 |Created by|Fikri Arkani Salim|
 |Participant|Muhammad Daffa Alifiandi, Muaz Abdul Rohim, Pujo Prayogo, Fikri Arkani Salim|
 ## Sprint Planning
 ### Goals:
-- Membuat dokumentasi API aplikasi
-- Fiksasi Mockup Landing Page 
-- Menyelesaikan WireFreame Landing Page
-- Membuat WireFrame page Dashboard
-- Fiksasi Mockup Landing Page 
-- Fiksasi Mockup Page Login 
-- Fiksasi Mockup Page Register
+- Implementasi API Register 
+- Testing API Register 
+- Fiksasi page pengerjaan tryout 
+- Membuat icon 
+- Fiksasi page Dashboard 
+- Menyelesaikan Mockup Landing Page 
+- Fiksasi Mockup Page Register 
 - Menyelesaikan Mockup Page Artikel 
-- Membuat User Story 
+- Testing API Register 
+- Membuat dokumentasi sprint mingguan 
 ### Breakdown Task:
 #### Commitment: 10 SP
 - Muhammad Daffa Alifiandi: 
-  - [X] Membuat dokumentasi API aplikasi 
+  - [X] Implementasi API Register 
 - Muaz Abdul Rohim: 
-  - [X] Membuat dokumentasi API aplikasi 
+  - [X] Testing API Register 
 - Pujo Prayogo: 
-  - [X] Fiksasi Mockup Landing Page 
-  - [X] Menyelesaikan WireFreame Landing Page
-  - [X] Membuat WireFrame page Dashboard
-  - [X] Fiksasi Mockup Landing Page 
-  - [X] Fiksasi Mockup Page Login 
-  - [X] Fiksasi Mockup Page Register
+  - [X] Fiksasi page pengerjaan tryout 
+  - [X] Membuat icon 
+  - [X] Fiksasi page Dashboard 
+  - [X] Menyelesaikan Mockup Landing Page 
+  - [X] Fiksasi Mockup Page Register 
   - [X] Menyelesaikan Mockup Page Artikel 
 - Fikri Arkani Salim: 
-  - [X] Membuat User Story 
+  - [X] Testing API Register 
+  - [X] Membuat dokumentasi sprint mingguan 
 
 #### Delivered:	 10 SP
 ### During Sprint
-2023-09-11:
+2023-09-18:
 
 1. Feedback
 1. Blocker

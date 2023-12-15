@@ -1,42 +1,41 @@
 # Sprint 3
 
 
-|Date|25 September 2023|
+|Date|2 Oktober 2023|
 | :- | :- |
 |Created by|Fikri Arkani Salim|
 |Participant|Muhammad Daffa Alifiandi, Muaz Abdul Rohim, Pujo Prayogo, Fikri Arkani Salim|
 ## Sprint Planning
 ### Goals:
-- Routing Antar Pages 
-- Login : Authentikasi dan validasi & implemetasi desain UI/UX 
-- Integrasi Back-end dan front-end di fitur update profile 
-- Implementasi Front-end pengerjaan Soal Tryout 
-- Implementasi API backend pada profile dan dashboard 
-- Membuat mockup desain responsive 
-- Testing API Login
-- Membuat dokumentasi sprint mingguan 
+- Implementasi fornt-end update profile
+- Implementasi Front-end Dashboard setelah fiksasi Desain
+- Optimisasi Desain front-end pada login dan register
+- Membuat implementasi front end Landing Page
+- Dashboard: pengambilan data tryout
+- Implementasi pengerjaan tryout
+- Membuat mockup desain 
+- Membuat dokumentasi sprint mingguan
+- Testing API logout 
 ### Breakdown Task:
-#### Commitment: 11 SP
+#### Commitment: 9 SP
 - Muhammad Daffa Alifiandi: 
-  - [X] Routing Antar Pages 
-  - [X] Login : Authentikasi dan validasi & implemetasi desain UI/UX 
-  - [X] Integrasi Back-end dan front-end di fitur update profile 
-  - [X] Implementasi Front-end pengerjaan Soal Tryout 
-  - [X] Implementasi API backend pada profile dan dashboard 
+  - [X] Implementasi fornt-end update profile
+  - [X] Implementasi Front-end Dashboard setelah fiksasi Desain
+  - [X] Optimisasi Desain front-end pada login dan register
+  - [X] Membuat implementasi front end Landing Page
 - Muaz Abdul Rohim: 
-  - [X] Error Handling autentikasi 
-  - [X] Login : Authentikasi dan validasi & implemetasi desain UI/UX 
-  - [X] Integrasi Back-end dan front-end di fitur update profile 
+  - [X] Dashboard: pengambilan data tryout
+  - [X] Implementasi pengerjaan tryout
 - Pujo Prayogo: 
   - [X] Membuat mockup desain responsive 
 - Fikri Arkani Salim: 
-  - [X] Testing API Login 
-  - [X] Membuat dokumentasi sprint mingguan 
+  - [X] Membuat dokumentasi sprint mingguan
+  - [X] Testing API logout 
   
 
-#### Delivered:	 11 SP
+#### Delivered:	 9 SP
 ### During Sprint
-2023-09-25:
+2023-10-02:
 
 1. Feedback
 1. Blocker
