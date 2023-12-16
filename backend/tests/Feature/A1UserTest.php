@@ -52,7 +52,6 @@ class A1UserTest extends TestCase
             'email' => 'mhsmhs123@mail.com',
             'password' => 'mhs123',
         ]);
-        /* echo var_dump($loginResponse); */
 
         $loginResponse->assertStatus(201); // Assert login was successful
 
