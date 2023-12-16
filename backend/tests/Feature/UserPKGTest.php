@@ -115,6 +115,7 @@ class UserPKGTest extends TestCase
         var_export($resultArray); */
 
         $response->assertStatus(200);
+        return true;
     }
 
     // public function test_start_user_tryout()
