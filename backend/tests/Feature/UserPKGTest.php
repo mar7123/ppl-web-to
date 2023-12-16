@@ -5,10 +5,12 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use App\Models\User;
+use Illuminate\Foundation\Testing\WithConsoleEvents;
 use Tests\TestCase;
 
 class UserPKGTest extends TestCase
 {
+    use WithConsoleEvents;
     /**
      * A basic feature test example.
      */
@@ -112,7 +114,6 @@ class UserPKGTest extends TestCase
         
 
         $response->assertStatus(200);
-        return true;
     }
 
     // public function test_start_user_tryout()

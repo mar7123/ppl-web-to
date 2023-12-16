@@ -4,11 +4,13 @@ namespace Tests\Feature;
 
 use App\Models\Article;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithConsoleEvents;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ArticleTest extends TestCase
 {
+    use WithConsoleEvents;
     /**
      * A basic feature test example.
      */

@@ -3,11 +3,14 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithConsoleEvents;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class TryoutPKGTest extends TestCase
 {
+    use WithConsoleEvents;
+
     /**
      * A basic feature test example.
      */

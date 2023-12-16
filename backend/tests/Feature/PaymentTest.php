@@ -9,12 +9,15 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Payment;
 use App\Models\User;
+use Illuminate\Foundation\Testing\WithConsoleEvents;
 use Xendit\Invoice\InvoiceApi;
 use Tests\TestCase;
 use Mockery;
 
 class PaymentTest extends TestCase
 {
+    use WithConsoleEvents;
+
     /**
      * A basic feature test example.
      */

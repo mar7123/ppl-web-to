@@ -6,10 +6,13 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\WithFaker;
 use App\Models\User;
+use Illuminate\Foundation\Testing\WithConsoleEvents;
 use Tests\TestCase;
 
 class A1UserTest extends TestCase
 {
+    use WithConsoleEvents;
+
     /**
      * A basic feature test example.
      */
