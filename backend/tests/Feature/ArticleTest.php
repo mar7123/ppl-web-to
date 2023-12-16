@@ -14,7 +14,6 @@ class ArticleTest extends TestCase
      */
 //     public function test_take_article(): void
 //     {
-//         /* $response = $this->get('/');
 
 //         $response->assertStatus(200); */
 //         /* $article = Article::factory()->create();
