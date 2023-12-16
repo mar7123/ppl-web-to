@@ -24,7 +24,6 @@ class PaymentTest extends TestCase
             'email' => 'admin123@email.com',
             'password' => 'admin123'
         ]);
-        // echo var_dump($loginResponse);
 
         $token = $loginResponse->json('token');
         
