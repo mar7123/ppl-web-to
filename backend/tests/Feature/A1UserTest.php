@@ -57,7 +57,6 @@ class A1UserTest extends TestCase
 
         // Extract the token from the login response
         $token = $loginResponse->json('token');
-        /* echo var_dump($token); */
 
         // Logout using the obtained token
         $logoutResponse = $this->withHeaders([
