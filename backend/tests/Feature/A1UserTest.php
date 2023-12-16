@@ -14,7 +14,6 @@ class A1UserTest extends TestCase
      * A basic feature test example.
      */
     /* use DatabaseMigrations; */
-    /* use RefreshDatabase; */
 
     public function test_create_new_user()
     {
