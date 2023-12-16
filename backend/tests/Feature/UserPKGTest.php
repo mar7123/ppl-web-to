@@ -109,10 +109,7 @@ class UserPKGTest extends TestCase
         /* echo var_dump($response); */
         /* echo $response->content(); */
 
-        //print response
-        /* $resultArray = json_decode($response->content(),true);
-
-        var_export($resultArray); */
+        
 
         $response->assertStatus(200);
         return true;
