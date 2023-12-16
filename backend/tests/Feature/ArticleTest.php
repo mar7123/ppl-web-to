@@ -18,7 +18,6 @@ class ArticleTest extends TestCase
 
 //         $response->assertStatus(200); */
 //         /* $article = Article::factory()->create();
-//         //dd($cek);
 
 //         $response = $this->getJson(route('/articles/{id}',$this->$article->article_id));
 
