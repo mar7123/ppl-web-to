@@ -63,7 +63,6 @@ class ArticleTest extends TestCase
      */
     public function test_get_articles()
     {
-        // Buat beberapa data artikel palsu menggunakan factory
         /* Article::factory()->count(3)->create(); */
 
         /* $userData = Article::where('author', 'Priscilla Runte')->first();
