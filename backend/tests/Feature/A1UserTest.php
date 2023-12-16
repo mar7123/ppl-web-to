@@ -63,7 +63,6 @@ class A1UserTest extends TestCase
             'Authorization' => 'Bearer ' . $token,
             'Accept' => 'application/json',
         ])->getJson('/api/logout');
-        /* echo var_dump($logoutResponse); */
 
         $logoutResponse->assertStatus(200)
             ->assertJson([
