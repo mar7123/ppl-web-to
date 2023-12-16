@@ -17,7 +17,6 @@ class TryoutPKGTest extends TestCase
     //         'email' => 'mhsmhs123@mail.com',
     //         'password' => 'mhs123',
     //     ]);
-    //     /* echo var_dump($loginResponse); */
     //     $token = $loginResponse->json('token');
 
     //     $response = $this->withHeaders([
