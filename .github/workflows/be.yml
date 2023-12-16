@@ -36,6 +36,12 @@ jobs:
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-progress
 
+    - name: Install db
+      run: php artisan migrate:install
+    
+    - name: Schema dump
+      run: php artisan schema:dump
+
     - name: Migrate db
       run: php artisan migrate:refresh --seed
 
